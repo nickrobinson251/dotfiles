@@ -1,0 +1,17 @@
+execute pathogen#infect()
+execute pathogen#helptags()
+
+filetype plugin indent on
+syntax on
+
+"Show line numbers
+set nu
+
+"Highlight YAML frontmatter in jekyll
+let g:vim_markdown_frontmatter = 1
+
+"Python 3 syntax checking
+let g:pymode_python = 'python3'
+
+"Don't compress two blank lines to one in python
+let g:topiary_ft_allow_two_blank_lines = ['python']
