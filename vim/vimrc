@@ -6,7 +6,12 @@ syntax on
 
 "Show line numbers
 set nu
+"Show what's pressed in command mode
 set showcmd
+"Expand tabs as 4 spaces
+set expandtab
+set shiftwidth=4
+set tabstop=4
 
 let mapleader = ';'
 
