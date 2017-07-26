@@ -6,6 +6,9 @@ syntax on
 
 "Show line numbers
 set nu
+set showcmd
+
+let mapleader = ';'
 
 "Highlight YAML frontmatter in jekyll
 let g:vim_markdown_frontmatter = 1
