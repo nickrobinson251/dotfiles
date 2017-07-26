@@ -15,3 +15,9 @@ let g:pymode_python = 'python3'
 
 "Don't compress two blank lines to one in python
 let g:topiary_ft_allow_two_blank_lines = ['python']
+
+"close documentation preview window after autocomplete
+augroup preview
+    autocmd!
+    autocmd CompleteDone * pclose
+augroup END
