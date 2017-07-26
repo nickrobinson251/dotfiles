@@ -21,3 +21,9 @@ augroup preview
     autocmd!
     autocmd CompleteDone * pclose
 augroup END
+
+"open and edit vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
+"source vimrc to apply it in current session
+nnoremap <leader>sv :source $MYVIMRC<cr>
