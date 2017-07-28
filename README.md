@@ -7,3 +7,9 @@ git clone https://github.com/nickrobinson251/dotfiles.git ~/.dotfiles --recursiv
 cd ~/.dotfiles
 rcup -v -x README.md
 ```
+
+Make sure [vim](http://www.vim.org/) supports Python 3. For example on macOS with [homebrew](https://brew.sh/), run
+
+```sh
+brew install vim --with-python3
+```
