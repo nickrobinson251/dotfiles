@@ -2,7 +2,7 @@
 set -gx LSCOLORS gxfxcxdxbxegedabagacad
 
 # append anaconda to path so we can use conda
-set -gx PATH /Users/npr/anaconda/bin $PATH
+set -gx PATH $HOME/anaconda/bin $PATH
 
 # make using conda virtual envs possible. Start/stop with
 # '[conda] activate <env>' and '[conda] deactivate'
