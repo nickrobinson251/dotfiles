@@ -27,6 +27,9 @@ augroup preview
     autocmd CompleteDone * pclose
 augroup END
 
+"shortcut to lint a python file
+nnoremap <leader>l :PymodeLintAuto<cr>
+
 "open and edit vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
