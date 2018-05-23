@@ -35,3 +35,6 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 "source vimrc to apply it in current session
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+"insert blank line below without leaving normal mode
+nnoremap <C-o> o<Esc>k
