@@ -15,11 +15,14 @@ set tabstop=4
 
 let mapleader = ';'
 
-"Highlight YAML frontmatter in jekyll
+"highlight YAML frontmatter in jekyll
 let g:vim_markdown_frontmatter = 1
 
 "Python 3 syntax checking
 let g:pymode_python = 'python3'
+
+"disable pymode folding because it is painfully slow
+let g:pymode_folding = 0
 
 "close documentation preview window after autocomplete
 augroup preview
