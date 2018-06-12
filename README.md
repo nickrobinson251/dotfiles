@@ -18,6 +18,6 @@ brew install vim --with-python3
 Install new vim plugins with [pathogen](https://github.com/tpope/vim-pathogen) using [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) like
 ```sh
 cd ~/.dotfiles/vim/bundle
-git submodules add git://github.com/tpope/vim-sensible.git
+git submodule add git://github.com/tpope/vim-sensible.git
 ```
 then `rcup` and source vimrc.
