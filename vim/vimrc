@@ -18,7 +18,11 @@ let mapleader = ';'
 "highlight YAML frontmatter in jekyll
 let g:vim_markdown_frontmatter = 1
 
-"Python 3 syntax checking
+"use ripgrep for file picker (when not in a git repo)
+let g:picker_find_executable = 'rg'
+let g:picker_find_flags = '--color never --files'
+
+"enable Python 3 syntax checking
 let g:pymode_python = 'python3'
 
 "disable pymode folding because it is painfully slow
@@ -41,3 +45,14 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 "insert blank line below without leaving normal mode
 nnoremap <C-o> o<Esc>k
+
+"picker key sequences Scott recommends
+nmap <unique> <leader>pe <Plug>PickerEdit
+nmap <unique> <leader>ps <Plug>PickerSplit
+nmap <unique> <leader>pt <Plug>PickerTabedit
+nmap <unique> <leader>pv <Plug>PickerVsplit
+nmap <unique> <leader>pb <Plug>PickerBuffer
+nmap <unique> <leader>p] <Plug>PickerTag
+nmap <unique> <leader>pw <Plug>PickerStag
+nmap <unique> <leader>po <Plug>PickerBufferTag
+nmap <unique> <leader>ph <Plug>PickerHelp

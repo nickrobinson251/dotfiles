@@ -34,6 +34,6 @@
 [submodule "vim/bundle/vim-sort-motion"]
 	path = vim/bundle/vim-sort-motion
 	url = https://github.com/christoomey/vim-sort-motion.git
-[submodule "vim/bundle/ale"]
-	path = vim/bundle/ale
-	url = https://github.com/w0rp/ale.git
+[submodule "vim/bundle/vim-picker"]
+	path = vim/bundle/vim-picker
+	url = https://github.com/srstevenson/vim-picker.git
