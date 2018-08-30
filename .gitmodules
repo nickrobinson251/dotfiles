@@ -37,3 +37,6 @@
 [submodule "vim/bundle/vim-picker"]
 	path = vim/bundle/vim-picker
 	url = https://github.com/srstevenson/vim-picker.git
+[submodule "vim/bundle/ale"]
+	path = vim/bundle/ale
+	url = https://github.com/w0rp/ale.git
