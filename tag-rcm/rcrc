@@ -1,0 +1,4 @@
+# ~/.rcrc
+
+EXCLUDES="README.md"
+TAGS="fish git nvim rcm tmux"

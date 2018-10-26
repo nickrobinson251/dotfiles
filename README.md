@@ -1,23 +1,27 @@
 # Dotfiles
 
-Install [rcm](https://github.com/thoughtbot/rcm#installation), clone this repo and use rcm to symlink the appropriate files to the home directory.
-To include the vim plugin submodules use the `--recursive` flag when cloning.
+Install [rcm](https://github.com/thoughtbot/rcm), clone this repo, and use rcm to
+symlink the appropriate files to the home directory.
 
 ```sh
-git clone https://github.com/nickrobinson251/dotfiles.git ~/.dotfiles --recursive
+git clone https://github.com/nickrobinson251/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-rcup -v -x README.md
+env RCRC="~/.dotfiles/tag-rcm/rcrc" rcup
+
 ```
 
-Make sure [vim](http://www.vim.org/) supports Python 3. For example on macOS with [homebrew](https://brew.sh/), run
+Make sure [neovim](https://neovim.io/) is installed and supports Python 3.
+For example on macOS with [homebrew](https://brew.sh/), run
 
 ```sh
-brew install vim --with-python3
+brew install neovim python3
+pip3 install --upgrade neovim
 ```
 
-Install new vim plugins with [pathogen](https://github.com/tpope/vim-pathogen) using [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) like
-```sh
-cd ~/.dotfiles/vim/bundle
-git submodule add git://github.com/tpope/vim-sensible.git
+Add new neovim plugins with [vim-plug](https://github.com/junegunn/vim-plug) like
+```vim
+call plug#begin()
+    Plug 'tpope/vim-sensible'
+call plug#end()
 ```
-then `rcup` and source vimrc.
+then `rcup`, `:PlugUpdate`, and `:source $MYVIMRC`.
