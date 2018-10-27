@@ -1,4 +1,5 @@
-# This is Git's per-user configuration file.
+# ~/.gitconfig
+# git's per-user configuration file
 [user]
 	name = Nick Robinson
 	email = npr251@gmail.com
@@ -6,3 +7,4 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [core]
 	editor = /usr/local/bin/nvim
+	excludesfile = $HOME/.dotfiles/tag-git/gitignore
