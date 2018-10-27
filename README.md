@@ -6,7 +6,7 @@ symlink the appropriate files to the home directory.
 ```sh
 git clone https://github.com/nickrobinson251/dotfiles.git ~/.dotfiles --recursive
 cd ~/.dotfiles
-env RCRC="~/.dotfiles/tag-rcm/rcrc" rcup
+env RCRC=tag-rcm/rcrc rcup
 ```
 
 Make sure [neovim](https://neovim.io/),
@@ -22,7 +22,7 @@ pip3 install --upgrade neovim
 Add new neovim plugins with [vim-plug](https://github.com/junegunn/vim-plug)
 like
 ```vim
-# ~/.config/nvim/inti/vim
+# ~/.config/nvim/init.vim
 call plug#begin()
 Plug 'tpope/vim-sensible'
 call plug#end()
