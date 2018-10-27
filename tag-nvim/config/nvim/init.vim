@@ -36,6 +36,7 @@ let mapleader = ';'
 filetype plugin indent on
 syntax on
 colorscheme onedark
+set encoding=utf-8
 set textwidth=80
 "show where 'textwidth' ends
 set colorcolumn=+1
@@ -105,7 +106,6 @@ augroup END
 
 "airline status/tabline
 let g:airline_theme = 'onedark'
-let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
 "highlight YAML frontmatter in jekyll
