@@ -4,10 +4,9 @@ Install [rcm](https://github.com/thoughtbot/rcm), clone this repo, and use rcm t
 symlink the appropriate files to the home directory.
 
 ```sh
-git clone https://github.com/nickrobinson251/dotfiles.git ~/.dotfiles
+git clone https://github.com/nickrobinson251/dotfiles.git ~/.dotfiles --recursive
 cd ~/.dotfiles
 env RCRC="~/.dotfiles/tag-rcm/rcrc" rcup
-
 ```
 
 Make sure [neovim](https://neovim.io/),
