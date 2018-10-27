@@ -1,6 +1,6 @@
 " ~/.config/nvim/int.vim
-"
-"instal vim-plug and plugins if not already installed
+
+"install vim-plug and plugins if not already installed
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
   silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -8,64 +8,89 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.local/share/nvim/site/plugins')
-" Plug 'AndrewRadev/splitjoin.vim'
-Plug 'JuliaEditorSupport/julia-vim'
-Plug 'autozimu/LanguageClient-neovim', {
-\       'branch': 'next',
-\       'do': 'bash install.sh'}
 Plug 'christoomey/vim-sort-motion'
 Plug 'joshdick/onedark.vim' "colorscheme
-Plug 'ncm2/ncm2' "formerly nvim-completion-manager
+Plug 'ncm2/ncm2' "formerly nvim-completion-manager - unneeded given w0rp/ale?
 Plug 'ncm2/ncm2-bufword' "complete words from current buffer
 Plug 'ncm2/ncm2-tmux' "complete words from other tmux panes
 Plug 'roxma/nvim-yarp' "required for ncm2
+Plug 'sheerun/vim-polyglot'
 Plug 'srstevenson/vim-picker'
 Plug 'srstevenson/vim-topiary'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession' "manage sessions
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline' "status line
 Plug 'vim-airline/vim-airline-themes'
-Plug 'w0rp/ale' "not sure we need this if using LanguageServer
+Plug 'w0rp/ale'
 call plug#end()
 
 """""""""""""
 "vim settings
+let mapleader = ';'
 filetype plugin indent on
 syntax on
 colorscheme onedark
-
-"Show line numbers
-set nu
 set textwidth=80
-"Show what's pressed in command mode
+"show where 'textwidth' ends
+set colorcolumn=+1
+"show line numbers
+set number
+"show what's pressed in command mode
 set showcmd
-"Expand tabs as 4 spaces
-set expandtab
+"expand tabs/shift as 4 spaces
 set shiftwidth=4
 set tabstop=4
+set expandtab
+"round indent to multiple of 'shiftwidth'
+set shiftround
+"open new split panes below instead of above, and to right not left
+set splitbelow
+set splitright
 
-let mapleader = ';'
-
-"enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-
-"suggested way to manage ncm2 popups, see :help Ncm2PopupOpen
-au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
-au User Ncm2PopupClose set completeopt=menuone
+"navigate betwen windows quicker
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 "open and edit vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-
 "source vimrc to apply it in current session
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 "insert blank line below without leaving normal mode
 nnoremap <C-o> o<Esc>k
+
+"make me into a good vim user...
+nnoremap <Left> :echoe "Use h"<cr>
+nnoremap <Right> :echoe "Use l"<cr>
+nnoremap <Up> :echoe "Use k"<cr>
+nnoremap <Down> :echoe "Use j"<cr>
+
+"have shift+3 be # (previous ^+3 was £, alt+3 was #)
+inoremap £ #
+"type backticks with crtl+z
+inoremap  `
+
+"enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+"suggested way to manage ncm2 popups, see :help Ncm2PopupOpen
+au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+au User Ncm2PopupClose set completeopt=menuone
+"use <TAB> to select the ncm2 popup menu
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+let g:ale_completion_enabled = 1
+let g:ale_open_list = 1
+"see ale status in nicer format
+let g:airline#extensions#ale#enabled = 1
 
 ""auto replace triple dots with ellipsis symbol
 augroup markdown
@@ -79,7 +104,7 @@ augroup preview
 augroup END
 
 "airline status/tabline
-let g:airline_theme = 'term'
+let g:airline_theme = 'onedark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
@@ -88,7 +113,6 @@ let g:vim_markdown_frontmatter = 1
 
 """"""""""""
 "file picker
-"
 "use ripgrep for file picker (when not in a git repo)
 let g:picker_find_executable = 'rg'
 let g:picker_find_flags = '--color never --files'
@@ -107,11 +131,11 @@ nmap <leader>ph <Plug>PickerHelp
 """"""
 "julia
 "point to executable (even though julia already on PATH in /usr/local/bin)
-let g:ale_julia_executable = '/Applications/Julia-1.0.app/Contents/Resources/julia/bin/julia'
+let g:ale_julia_executable =
+\   '/Applications/Julia-1.0.app/Contents/Resources/julia/bin/julia'
 
-"julia-vim settings
+"julia-vim settings - not sure if needed with vim-polyglot
 let g:default_julia_version = '1.0'
-
 "automatically substitute unicode for latex in julia
 let g:latex_to_unicode_auto = 1
 let g:latex_to_unicode_eager = 1
@@ -133,6 +157,6 @@ let g:LanguageClient_serverCommands = {
 \       run(server);
 \   '],
 \ }
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<cr>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<cr>
