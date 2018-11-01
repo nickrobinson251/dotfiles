@@ -1,4 +1,4 @@
-# ~/.gitconfig
+# ~/.config/git/config
 # git's per-user configuration file
 [user]
 	name = Nick Robinson
