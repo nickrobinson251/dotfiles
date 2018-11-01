@@ -9,6 +9,7 @@ endif
 
 call plug#begin('~/.local/share/nvim/site/plugins')
 Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-sort-motion'
 Plug 'joshdick/onedark.vim' "colorscheme
 Plug 'ncm2/ncm2' "formerly nvim-completion-manager - unneeded given w0rp/ale?
