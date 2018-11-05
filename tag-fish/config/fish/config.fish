@@ -17,9 +17,11 @@ if not contains $HOME/anaconda/bin $PATH
 end
 
 # make using conda virtual envs possible
-# start/stop using env with 'conda activate <env>' and '[conda] deactivate'
+# start/stop using env with 'conda activate <env>' and 'conda deactivate'
 if not functions -q __fish_right_prompt_orig
-    source (conda info --root)/etc/fish/conf.d/conda.fish
+    if test -d /anaconda3
+        source /anaconda3/etc/fish/conf.d/conda.fish
+    end
 end
 
 # make environment name appear on the left side of prompt
