@@ -11,21 +11,18 @@ set -g fish_color_cwd 98c379
 # print directory names in brighter blue
 set -gx LSCOLORS gxfxcxdxbxegedabagacad
 
-# prepend anaconda to path so we can use conda
-if not contains $HOME/anaconda/bin $PATH
-    set -gx PATH $home/anaconda/bin $PATH
-end
-
-# make using conda virtual envs possible
-# start/stop using env with 'conda activate <env>' and 'conda deactivate'
-if not functions -q __fish_right_prompt_orig
-    if test -n "$_CONDA_ROOT"
+if test -n "$_CONDA_ROOT"
+    # prepend conda to path if installed
+    if not contains $_CONDA_ROOT $PATH
+        set -gx PATH $_CONDA_ROOT $PATH
+    end
+    # make conda environment name appear on the left side of prompt
+    set -gx CONDA_LEFT_PROMPT 1
+    # enable ability to switch to/from envs with`conda [de]activate <env>'
+    if not functions -q __fish_right_prompt_orig
         source $_CONDA_ROOT/etc/fish/conf.d/conda.fish
     end
 end
-
-# make environment name appear on the left side of prompt
-set -gx CONDA_LEFT_PROMPT 1
 
 # set neovim as default editor
 set -gx VISUAL nvim
