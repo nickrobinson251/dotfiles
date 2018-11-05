@@ -94,6 +94,15 @@ nmap <leader>pw <Plug>PickerStag
 nmap <leader>po <Plug>PickerBufferTag
 nmap <leader>ph <Plug>PickerHelp
 
+"more mnemoic gitgutter shortcuts for hunks
+let g:gitgutter_map_keys = 0
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hr <Plug>GitGutterUndoHunk
+omap ih <Plug>GitGutterTextObjectInnerPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+
 "have shift+3 be # (previous shift+3 was £, alt+3 was #)
 inoremap £ #
 "type backticks with crtl+z
