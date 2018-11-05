@@ -39,6 +39,7 @@ syntax on
 colorscheme onedark
 set encoding=utf-8
 set textwidth=80
+au FileType julia setlocal textwidth=92
 set colorcolumn=+1 "show where 'textwidth' ends
 set number "show line numbers
 set showcmd "show what's pressed in command mode
