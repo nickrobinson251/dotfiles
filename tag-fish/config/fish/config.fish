@@ -19,8 +19,8 @@ end
 # make using conda virtual envs possible
 # start/stop using env with 'conda activate <env>' and 'conda deactivate'
 if not functions -q __fish_right_prompt_orig
-    if test -d /anaconda3
-        source /anaconda3/etc/fish/conf.d/conda.fish
+    if test -n "$_CONDA_ROOT"
+        source $_CONDA_ROOT/etc/fish/conf.d/conda.fish
     end
 end
 
