@@ -12,6 +12,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-sort-motion'
 Plug 'joshdick/onedark.vim' "colorscheme
+Plug 'jpalardy/vim-slime' "send code to repl in different pane
 Plug 'ncm2/ncm2' "formerly nvim-completion-manager - unneeded given w0rp/ale?
 Plug 'ncm2/ncm2-bufword' "complete words from current buffer
 Plug 'ncm2/ncm2-tmux' "complete words from other tmux panes
@@ -36,7 +37,6 @@ call plug#end()
 let mapleader = ';'
 filetype plugin indent on
 syntax on
-colorscheme onedark
 set encoding=utf-8
 set textwidth=80
 au FileType julia setlocal textwidth=92
@@ -95,11 +95,9 @@ nmap <leader>po <Plug>PickerBufferTag
 nmap <leader>ph <Plug>PickerHelp
 
 "more mnemoic gitgutter shortcuts for hunks
-let g:gitgutter_map_keys = 0
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
 nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hr <Plug>GitGutterUndoHunk
 omap ih <Plug>GitGutterTextObjectInnerPending
 xmap ih <Plug>GitGutterTextObjectInnerVisual
 
@@ -119,11 +117,6 @@ au User Ncm2PopupClose set completeopt=menuone
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-let g:ale_completion_enabled = 1
-let g:ale_open_list = 1
-"see ale status in nicer format
-let g:airline#extensions#ale#enabled = 1
-
 ""auto replace triple dots with ellipsis symbol
 augroup markdown
   autocmd FileType markdown iabbrev <buffer> ... …
@@ -134,6 +127,18 @@ augroup preview
     autocmd!
     autocmd CompleteDone * pclose
 augroup END
+
+"send code to repl in tmux pane
+let g:slime_target = "tmux"
+let g:slime_paste_file = "$HOME/.tmux/slime_paste"
+"default for split tmux window, vim in one pane sending to repl in other pane
+let g:slime_default_config = {
+\   "socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
+
+let g:ale_completion_enabled = 1
+let g:ale_open_list = 1
+"see ale status in nicer format
+let g:airline#extensions#ale#enabled = 1
 
 "airline status/tabline
 let g:airline_theme = 'onedark'
@@ -165,7 +170,7 @@ let g:latex_to_unicode_tab = 1
 "see https://github.com/JuliaEditorSupport/LanguageServer.jl/wiki/Vim-and-Neovim
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-\   'julia': ['/Applications/Julia-1.06.app/Contents/Resources/julia/bin/julia',
+\   'julia': ['/Applications/Julia-1.0.app/Contents/Resources/julia/bin/julia',
 \   '--startup-file=no', '--history-file=no', '-e', '
 \       using LanguageServer;
 \       server = LanguageServer.LanguageServerInstance(stdin, stdout, false);
@@ -176,3 +181,11 @@ let g:LanguageClient_serverCommands = {
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<cr>
 nnoremap <silent> D :call LanguageClient_textDocument_definition()<cr>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<cr>
+
+"customize colorscheme with brighter comments
+augroup colorextend
+    autocmd!
+    autocmd ColorScheme * call onedark#extend_highlight("Comment", { "fg": { "cterm": 244 } })
+augroup END
+
+colorscheme onedark
