@@ -2,6 +2,9 @@
 # no welcome message
 set -g fish_greeting
 
+set -g __fish_git_prompt_show_informative_status 1
+set -g __fish_git_prompt_showupstream "informative"
+
 # add vim modes and bindings as well as defaul emacs bindings
 set -g fish_key_bindings fish_hybrid_key_bindings
 
@@ -28,9 +31,9 @@ end
 set -gx VISUAL nvim
 set -gx EDITOR nvim
 
-# clear with crtl+o because crtl+l used by vim-tmux-navigator. See:
+# clear with crtl+n because crtl+l used by vim-tmux-navigator. See:
 # github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_shared_key_bindings.fish#L83
-bind -M insert $argv \co \
+bind -M insert $argv \cn \
     'echo -n (clear | string replace \e\[3J ""); commandline -f repaint'
 
 # add abbreviations as global variables because faster than default universal
@@ -41,7 +44,11 @@ if status --is-interactive
     abbr -a ga git add
     abbr -a gb git branch
     abbr -a gc git commit
+    abbr -a gco git checkout
     abbr -a gd git diff
     abbr -a gr git rebase
     abbr -a gs git status
+    abbr -a ta tmux attach -t
+    abbr -a tn tmux new -s
+    abbr -a ts tmux switch -t
 end
