@@ -38,7 +38,7 @@ let mapleader = ';'
 filetype plugin indent on
 syntax on
 set encoding=utf-8
-set textwidth=80
+set textwidth=88
 au FileType julia setlocal textwidth=92
 set colorcolumn=+1 "show where 'textwidth' ends
 set number "show line numbers
@@ -48,6 +48,7 @@ set showcmd "show what's pressed in command mode
 set expandtab
 set shiftwidth=4
 set tabstop=4
+set softtabstop=4
 set shiftround "round indent to multiple of 'shiftwidth'
 
 "open new split panes below instead of above, and to right not left
@@ -62,8 +63,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-"open and edit vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+"open and edit vimrc in new tab
+nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 "source vimrc to apply it in current session
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
@@ -139,6 +140,12 @@ let g:ale_completion_enabled = 1
 let g:ale_open_list = 1
 "see ale status in nicer format
 let g:airline#extensions#ale#enabled = 1
+"bind l for lint to fixing ALE problems
+nmap <leader>l <Plug>(ale_fix)
+"rely on black for all python formatting
+let g:ale_fixers = {'python': ['black']}
+"use black convention of line length 88
+let g:ale_python_flake8_options = '--max-line-length 88'
 
 "airline status/tabline
 let g:airline_theme = 'onedark'
