@@ -186,7 +186,8 @@ nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<cr>
 "customize colorscheme with brighter comments
 augroup colorextend
     autocmd!
-    autocmd ColorScheme * call onedark#extend_highlight("Comment", { "fg": { "cterm": 244 } })
+    autocmd ColorScheme * call onedark#extend_highlight(
+\       "Comment", { "fg": { "cterm": 244 } })
 augroup END
 
 colorscheme onedark
