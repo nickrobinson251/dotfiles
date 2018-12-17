@@ -39,7 +39,6 @@ filetype plugin indent on
 syntax on
 set encoding=utf-8
 set textwidth=88
-au FileType julia setlocal textwidth=92
 set colorcolumn=+1 "show where 'textwidth' ends
 set number "show line numbers
 set showcmd "show what's pressed in command mode
@@ -117,11 +116,6 @@ au User Ncm2PopupClose set completeopt=menuone
 "use <TAB> to select the ncm2 popup menu
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-""auto replace triple dots with ellipsis symbol
-augroup markdown
-  autocmd FileType markdown iabbrev <buffer> ... …
-augroup END
 
 "close documentation preview window after autocomplete
 augroup preview
