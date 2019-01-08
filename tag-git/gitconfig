@@ -1,14 +1,14 @@
 # ~/.config/git/config
 # git's per-user configuration file
 [user]
-	name = Nick Robinson
-	email = npr251@gmail.com
+    name = Nick Robinson
+    email = npr251@gmail.com
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     uncommit = reset --soft HEAD^
     unstage = reset
 [core]
 	editor = /usr/local/bin/nvim
-	excludesfile = $HOME/.config/git/ignore
+	excludesfile = $HOME/.gitignore
 [fetch]
     prune = true
