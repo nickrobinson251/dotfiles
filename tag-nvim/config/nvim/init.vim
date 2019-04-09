@@ -84,15 +84,15 @@ nnoremap <Up> :echoe "Use k"<cr>
 nnoremap <Down> :echoe "Use j"<cr>
 
 "picker key sequences Scott recommends
-nmap <leader>pe <Plug>PickerEdit
-nmap <leader>ps <Plug>PickerSplit
-nmap <leader>pt <Plug>PickerTabedit
-nmap <leader>pv <Plug>PickerVsplit
-nmap <leader>pb <Plug>PickerBuffer
-nmap <leader>p] <Plug>PickerTag
-nmap <leader>pw <Plug>PickerStag
-nmap <leader>po <Plug>PickerBufferTag
-nmap <leader>ph <Plug>PickerHelp
+nmap <leader>pe <Plug>(PickerEdit)
+nmap <leader>ps <Plug>(PickerSplit)
+nmap <leader>pt <Plug>(PickerTabedit)
+nmap <leader>pv <Plug>(PickerVsplit)
+nmap <leader>pb <Plug>(PickerBuffer)
+nmap <leader>p] <Plug>(PickerTag)
+nmap <leader>pw <Plug>(PickerStag)
+nmap <leader>po <Plug>(PickerBufferTag)
+nmap <leader>ph <Plug>(PickerHelp)
 
 "more mnemoic gitgutter shortcuts for hunks
 nmap ]h <Plug>GitGutterNextHunk
