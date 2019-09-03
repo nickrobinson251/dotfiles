@@ -162,8 +162,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:vim_markdown_frontmatter = 1
 
 "use ripgrep for file picker (when not in a git repo)
-let g:picker_find_executable = 'rg'
-let g:picker_find_flags = '--color never --files'
+" let g:picker_find_executable = 'rg'
+" let g:picker_find_flags = '--color never --files'
 
 "point to executable (even though julia already on PATH in /usr/local/bin)
 let g:ale_julia_executable =
