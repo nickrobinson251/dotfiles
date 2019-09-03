@@ -11,6 +11,7 @@ call plug#begin('~/.local/share/nvim/site/plugins')
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-sort-motion'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'joshdick/onedark.vim' "colourscheme
 Plug 'jpalardy/vim-slime' "send code to repl in different pane
 Plug 'ncm2/ncm2' "formerly nvim-completion-manager - unneeded given w0rp/ale?
@@ -98,6 +99,11 @@ nmap <leader>p] <Plug>PickerTag
 nmap <leader>pw <Plug>PickerStag
 nmap <leader>po <Plug>PickerBufferTag
 nmap <leader>ph <Plug>PickerHelp
+
+" normal/insert
+nmap <leader>mp <Plug>MarkdownPreview
+nmap <leader>ms <Plug>MarkdownPreviewStop
+nmap <leader>mt <Plug>MarkdownPreviewToggle
 
 "more mnemoic gitgutter shortcuts for hunks
 nmap ]h <Plug>GitGutterNextHunk
