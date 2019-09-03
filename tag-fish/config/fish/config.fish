@@ -39,16 +39,25 @@ bind -M insert $argv \cn \
 # add abbreviations as global variables because faster than default universal
 if status --is-interactive
     set -g fish_user_abbreviations
-    abbr -a cdd cd ~/.dotfiles
-    abbr -a g git
-    abbr -a ga git add
-    abbr -a gb git branch
-    abbr -a gc git commit
-    abbr -a gco git checkout
-    abbr -a gd git diff
-    abbr -a gr git rebase
-    abbr -a gs git status
-    abbr -a ta tmux attach -t
-    abbr -a tn tmux new -s
-    abbr -a ts tmux switch -t
+    abbr -a cdd 'cd ~/.dotfiles'
+    abbr -a cdswp 'cd ~/.local/share/nvim/swap'
+    abbr -a g 'git'
+    abbr -a ga 'git add'
+    abbr -a gb 'git branch'
+    abbr -a gba 'git branch --all'
+    abbr -a gbp 'git branch --merged master | rg -v \'^[ *]*master$\' | xargs git branch -d'
+    abbr -a gcm 'git commit'
+    abbr -a gco 'git checkout'
+    abbr -a gd 'git diff'
+    abbr -a gds 'git diff --staged'
+    abbr -a gf 'git fetch'
+    abbr -a gfp 'git fetch --prune'
+    abbr -a glg 'git lg'
+    abbr -a gr 'git rebase'
+    abbr -a gs 'git status'
+    abbr -a rgf 'rg --files-with-matches'
+    abbr -a ta 'tmux attach -t'
+    abbr -a tn 'tmux new -s'
+    abbr -a ts 'tmux switch -t'
 end
+set -g fish_user_paths "/usr/local/opt/sqlite/bin" $fish_user_paths

@@ -11,7 +11,8 @@ call plug#begin('~/.local/share/nvim/site/plugins')
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-sort-motion'
-Plug 'joshdick/onedark.vim' "colorscheme
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'joshdick/onedark.vim' "colourscheme
 Plug 'jpalardy/vim-slime' "send code to repl in different pane
 Plug 'ncm2/ncm2' "formerly nvim-completion-manager - unneeded given w0rp/ale?
 Plug 'ncm2/ncm2-bufword' "complete words from current buffer
@@ -38,6 +39,8 @@ let mapleader = ';'
 filetype plugin indent on
 syntax on
 set encoding=utf-8
+set autoindent
+set lisp
 set textwidth=88
 set colorcolumn=+1 "show where 'textwidth' ends
 set number "show line numbers
@@ -45,10 +48,10 @@ set showcmd "show what's pressed in command mode
 
 "expand tabs/shift as 4 spaces
 set expandtab
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
 set shiftround "round indent to multiple of 'shiftwidth'
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 
 "open new split panes below instead of above, and to right not left
 set splitbelow
@@ -66,6 +69,9 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 "source vimrc to apply it in current session
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+"open and edit gitconfig in new tab
+nnoremap <leader>eg :tabnew ~/.dotfiles/tag-git/gitconfig<cr>
 
 "insert blank line below without leaving normal mode
 nnoremap <C-o> o<Esc>k
@@ -93,6 +99,11 @@ nmap <leader>p] <Plug>(PickerTag)
 nmap <leader>pw <Plug>(PickerStag)
 nmap <leader>po <Plug>(PickerBufferTag)
 nmap <leader>ph <Plug>(PickerHelp)
+
+" normal/insert
+nmap <leader>mp <Plug>MarkdownPreview
+nmap <leader>ms <Plug>MarkdownPreviewStop
+nmap <leader>mt <Plug>MarkdownPreviewToggle
 
 "more mnemoic gitgutter shortcuts for hunks
 nmap ]h <Plug>GitGutterNextHunk
@@ -140,6 +151,8 @@ nmap <leader>l <Plug>(ale_fix)
 let g:ale_fixers = {'python': ['black']}
 "use black convention of line length 88
 let g:ale_python_flake8_options = '--max-line-length 88'
+"two blank lines fine in python and julia
+let g:topiary_ft_allow_two_blank_lines = ['python', 'julia']
 
 "airline status/tabline
 let g:airline_theme = 'onedark'
@@ -149,8 +162,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:vim_markdown_frontmatter = 1
 
 "use ripgrep for file picker (when not in a git repo)
-let g:picker_find_executable = 'rg'
-let g:picker_find_flags = '--color never --files'
+" let g:picker_find_executable = 'rg'
+" let g:picker_find_flags = '--color never --files'
 
 "point to executable (even though julia already on PATH in /usr/local/bin)
 let g:ale_julia_executable =
@@ -171,15 +184,23 @@ let g:latex_to_unicode_tab = 1
 "see https://github.com/JuliaEditorSupport/LanguageServer.jl/wiki/Vim-and-Neovim
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-\   'julia': ['/Applications/Julia-1.0.app/Contents/Resources/julia/bin/julia',
-\   '--startup-file=no', '--history-file=no', '-e', '
+\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
 \       using LanguageServer;
-\       server = LanguageServer.LanguageServerInstance(stdin, stdout, false);
+\       import StaticLint;
+\       import SymbolServer;
+\       debug = false;
+\       env_path = dirname(Base.active_project());
+\       depot_path = "";
+\       packages = Dict();
+\       server = LanguageServer.LanguageServerInstance(
+\           stdin, stdout, debug, env_path, depot_path, Dict()
+\       );
 \       server.runlinter = true;
 \       run(server);
-\   '],
+\   ']
 \ }
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<cr>
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> D :call LanguageClient_textDocument_definition()<cr>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<cr>
 
