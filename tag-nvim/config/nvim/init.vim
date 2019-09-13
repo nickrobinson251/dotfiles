@@ -100,11 +100,6 @@ nmap <leader>pw <Plug>(PickerStag)
 nmap <leader>po <Plug>(PickerBufferTag)
 nmap <leader>ph <Plug>(PickerHelp)
 
-" normal/insert
-nmap <leader>mp <Plug>MarkdownPreview
-nmap <leader>ms <Plug>MarkdownPreviewStop
-nmap <leader>mt <Plug>MarkdownPreviewToggle
-
 "more mnemoic gitgutter shortcuts for hunks
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
@@ -152,7 +147,7 @@ let g:ale_fixers = {'python': ['black']}
 "use black convention of line length 88
 let g:ale_python_flake8_options = '--max-line-length 88'
 "two blank lines fine in python and julia
-let g:topiary_ft_allow_two_blank_lines = ['python', 'julia']
+let g:topiary_ft_allow_two_blank_lines = ['python', 'julia', 'markdown']
 
 "airline status/tabline
 let g:airline_theme = 'onedark'
