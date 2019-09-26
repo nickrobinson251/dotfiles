@@ -106,11 +106,11 @@ nmap <leader>ms <Plug>MarkdownPreviewStop
 nmap <leader>mt <Plug>MarkdownPreviewToggle
 
 "more mnemoic gitgutter shortcuts for hunks
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
-nmap <Leader>ha <Plug>GitGutterStageHunk
-omap ih <Plug>GitGutterTextObjectInnerPending
-xmap ih <Plug>GitGutterTextObjectInnerVisual
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap <Leader>ha <Plug>(GitGutterStageHunk)
+omap ih <Plug>(GitGutterTextObjectInnerPending)
+xmap ih <Plug>(GitGutterTextObjectInnerVisual)
 
 "have shift+3 be # (previous shift+3 was £, alt+3 was #)
 inoremap £ #
