@@ -14,6 +14,7 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'joshdick/onedark.vim' "colourscheme
 Plug 'jpalardy/vim-slime' "send code to repl in different pane
+Plug 'kdheepak/JuliaFormatter.vim'
 Plug 'ncm2/ncm2' "formerly nvim-completion-manager - unneeded given w0rp/ale?
 Plug 'ncm2/ncm2-bufword' "complete words from current buffer
 Plug 'ncm2/ncm2-tmux' "complete words from other tmux panes
@@ -58,6 +59,7 @@ set splitbelow
 set splitright
 
 """""""""
+nnoremap <C-J> a<CR><Esc>k$
 "mappings
 "navigate betwen windows quicker
 nnoremap <C-j> <C-w>j
@@ -128,6 +130,10 @@ au User Ncm2PopupClose set completeopt=menuone
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+nnoremap <leader>jf :<C-u>call JuliaFormatter#Format(0)<cr>
+vnoremap <leader>jf :<C-u>call JuliaFormatter#Format(1)<cr>
+let g:JuliaFormatter_options = {'style': 'blue'}
+
 "close documentation preview window after autocomplete
 augroup preview
     autocmd!
@@ -152,7 +158,7 @@ let g:ale_fixers = {'python': ['black']}
 "use black convention of line length 88
 let g:ale_python_flake8_options = '--max-line-length 88'
 "two blank lines fine in python and julia
-let g:topiary_ft_allow_two_blank_lines = ['python', 'julia']
+let g:topiary_ft_allow_two_blank_lines = ['python', 'julia', 'markdown']
 
 "airline status/tabline
 let g:airline_theme = 'onedark'

@@ -31,6 +31,9 @@ end
 set -gx VISUAL nvim
 set -gx EDITOR nvim
 
+set -gx TF_ALIAS fk
+thefuck --alias | source
+
 # clear with crtl+n because crtl+l used by vim-tmux-navigator. See:
 # github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_shared_key_bindings.fish#L83
 bind -M insert $argv \cn \
@@ -54,6 +57,7 @@ if status --is-interactive
     abbr -a gfp 'git fetch --prune'
     abbr -a glg 'git lg'
     abbr -a gr 'git rebase'
+    abbr -a grb 'git rebase -i (git merge-base  origin/master HEAD)'
     abbr -a gs 'git status'
     abbr -a rgf 'rg --files-with-matches'
     abbr -a ta 'tmux attach -t'
