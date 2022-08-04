@@ -14,25 +14,15 @@ set -g fish_color_cwd 98c379
 # print directory names in brighter blue
 set -gx LSCOLORS gxfxcxdxbxegedabagacad
 
-if test -n "$_CONDA_ROOT"
-    # prepend conda to path if installed
-    if not contains $_CONDA_ROOT $PATH
-        set -gx PATH $_CONDA_ROOT $PATH
-    end
-    # make conda environment name appear on the left side of prompt
-    set -gx CONDA_LEFT_PROMPT 1
-    # enable ability to switch to/from envs with`conda [de]activate <env>'
-    if not functions -q __fish_right_prompt_orig
-        source $_CONDA_ROOT/etc/fish/conf.d/conda.fish
-    end
-end
-
 # set neovim as default editor
 set -gx VISUAL nvim
 set -gx EDITOR nvim
 
 set -gx TF_ALIAS fk
 thefuck --alias | source
+
+# INVENIA
+set -gx MISO_NDA_BUCKET invenia-miso-nda-5twngkbmrczu6xd9uppda18b5995yuse1a-s3alias
 
 # clear with crtl+n because crtl+l used by vim-tmux-navigator. See:
 # github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_shared_key_bindings.fish#L83
@@ -53,15 +43,35 @@ if status --is-interactive
     abbr -a gco 'git checkout'
     abbr -a gd 'git diff'
     abbr -a gds 'git diff --staged'
-    abbr -a gf 'git fetch'
-    abbr -a gfp 'git fetch --prune'
+    abbr -a gf 'git fetch --all'
+    abbr -a gfp 'git fetch --all --prune'
     abbr -a glg 'git lg'
     abbr -a gr 'git rebase'
-    abbr -a grb 'git rebase -i (git merge-base  origin/master HEAD)'
-    abbr -a gs 'git status'
-    abbr -a rgf 'rg --files-with-matches'
-    abbr -a ta 'tmux attach -t'
+    abbr -a grb 'git rebase -i (git merge-base origin/main HEAD)'
     abbr -a tn 'tmux new -s'
     abbr -a ts 'tmux switch -t'
+    abbr -a rgf 'rg --files-with-matches'
+    abbr -a rgc 'rg --ignore-case'
+    abbr -a rgi 'rg --only-matching "https://gitlab.invenia.ca/\S*/issues/\d+"' # rg issues
 end
 set -g fish_user_paths "/usr/local/opt/sqlite/bin" $fish_user_paths
+
+# Load pyenv and pyenv-virtualenv automatically
+pyenv init - | source
+status --is-interactive; and source (pyenv virtualenv-init -|psub)
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /Users/nick/miniconda/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
+function __conda_add_prompt
+    if set -q CONDA_PROMPT_MODIFIER
+        set_color -o black
+        if [ "$CONDA_PROMPT_MODIFIER" != "(base)" ]
+            set_color black
+            echo -n $CONDA_PROMPT_MODIFIER
+        end
+        set_color normal
+    end
+end
+set --erase CONDA_LEFT_PROMPT

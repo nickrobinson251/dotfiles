@@ -20,6 +20,7 @@ Plug 'ncm2/ncm2-bufword' "complete words from current buffer
 Plug 'ncm2/ncm2-tmux' "complete words from other tmux panes
 Plug 'roxma/nvim-yarp' "required for ncm2
 Plug 'sheerun/vim-polyglot' "syntax for various languages - includes julia-vim
+Plug 'tom--lee/julia-vim' "better indenting https://github.com/invenia/BlueStyle/issues/29
 Plug 'srstevenson/vim-picker'
 Plug 'srstevenson/vim-topiary'
 Plug 'tpope/vim-abolish'
@@ -37,11 +38,12 @@ call plug#end()
 """""""""
 "settings
 let mapleader = ';'
-filetype plugin indent on
 syntax on
-set encoding=utf-8
+filetype plugin on
+filetype indent on
 set autoindent
-set lisp
+" set lisp
+set encoding=utf-8
 set textwidth=88
 set colorcolumn=+1 "show where 'textwidth' ends
 set number "show line numbers
@@ -157,8 +159,8 @@ nmap <leader>l <Plug>(ale_fix)
 let g:ale_fixers = {'python': ['black']}
 "use black convention of line length 88
 let g:ale_python_flake8_options = '--max-line-length 88'
-"two blank lines fine in python and julia
-let g:topiary_ft_allow_two_blank_lines = ['python', 'julia', 'markdown']
+"two blank lines fine in python, julia adn text files
+let g:topiary_ft_allow_two_blank_lines = ['python', 'julia', 'markdown', 'toml', 'raw']
 
 "airline status/tabline
 let g:airline_theme = 'onedark'
@@ -173,7 +175,7 @@ let g:vim_markdown_frontmatter = 1
 
 "point to executable (even though julia already on PATH in /usr/local/bin)
 let g:ale_julia_executable =
-\   '/Applications/Julia-1.0.app/Contents/Resources/julia/bin/julia'
+\   '/Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia'
 
 "julia-vim settings - not sure if needed with vim-polyglot
 let g:default_julia_version = '1.0'

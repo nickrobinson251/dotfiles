@@ -2,22 +2,31 @@
 # git's per-user configuration file
 [user]
     name = Nick Robinson
-    email = nicholas.robinson@invenialabs.co.uk
+    email = npr251@gmail.com
 [alias]
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     uncommit = reset --soft HEAD^
     unstage = reset
     unstash = stash pop
 [core]
-	editor = /usr/local/bin/nvim
-	excludesfile = $HOME/.gitignore
-	ignorecase = false
-[fetch]
+    editor = /usr/local/bin/nvim
+    excludesfile = $HOME/.gitignore
+    ignorecase = false
+    [fetch]
     prune = true
+    all = true
+[rebase]
+    ; autoSquash = true
 [url "git@gitlab.invenia.ca:"]
     insteadOf = https://gitlab.invenia.ca/
 [gitlab]
     email = nicholas.robinson@invenialabs.co.uk
 [github]
-	user = nickrobinson251
+    user = nickrobinson251
     email = npr251@gmail.com
+; [push]
+; 	default = current
+[pull]
+    rebase = false
+[init]
+    defaultBranch = main
