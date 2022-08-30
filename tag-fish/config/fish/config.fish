@@ -14,12 +14,14 @@ set -g fish_color_cwd 98c379
 # print directory names in brighter blue
 set -gx LSCOLORS gxfxcxdxbxegedabagacad
 
+set -g fish_color_command white --bold
+
 # set neovim as default editor
 set -gx VISUAL nvim
 set -gx EDITOR nvim
 
-set -gx TF_ALIAS fk
-thefuck --alias | source
+# set -gx TF_ALIAS fk
+# thefuck --alias | source
 
 # INVENIA
 set -gx MISO_NDA_BUCKET invenia-miso-nda-5twngkbmrczu6xd9uppda18b5995yuse1a-s3alias
@@ -48,30 +50,31 @@ if status --is-interactive
     abbr -a glg 'git lg'
     abbr -a gr 'git rebase'
     abbr -a grb 'git rebase -i (git merge-base origin/main HEAD)'
+    abbr -a gs 'git status'
     abbr -a tn 'tmux new -s'
     abbr -a ts 'tmux switch -t'
     abbr -a rgf 'rg --files-with-matches'
     abbr -a rgc 'rg --ignore-case'
     abbr -a rgi 'rg --only-matching "https://gitlab.invenia.ca/\S*/issues/\d+"' # rg issues
 end
-set -g fish_user_paths "/usr/local/opt/sqlite/bin" $fish_user_paths
+set -g fish_user_paths "/usr/local/opt/sqlite/bin" "/opt/homebrew/bin" $fish_user_paths
 
-# Load pyenv and pyenv-virtualenv automatically
-pyenv init - | source
-status --is-interactive; and source (pyenv virtualenv-init -|psub)
+# # Load pyenv and pyenv-virtualenv automatically
+# pyenv init - | source
+# status --is-interactive; and source (pyenv virtualenv-init -|psub)
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /Users/nick/miniconda/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
-function __conda_add_prompt
-    if set -q CONDA_PROMPT_MODIFIER
-        set_color -o black
-        if [ "$CONDA_PROMPT_MODIFIER" != "(base)" ]
-            set_color black
-            echo -n $CONDA_PROMPT_MODIFIER
-        end
-        set_color normal
-    end
-end
-set --erase CONDA_LEFT_PROMPT
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# eval /Users/nick/miniconda/bin/conda "shell.fish" "hook" $argv | source
+# # <<< conda initialize <<<
+# function __conda_add_prompt
+#     if set -q CONDA_PROMPT_MODIFIER
+#         set_color -o black
+#         if [ "$CONDA_PROMPT_MODIFIER" != "(base)" ]
+#             set_color black
+#             echo -n $CONDA_PROMPT_MODIFIER
+#         end
+#         set_color normal
+#     end
+# end
+# set --erase CONDA_LEFT_PROMPT
