@@ -23,8 +23,10 @@ set -gx EDITOR nvim
 # set -gx TF_ALIAS fk
 # thefuck --alias | source
 
-# INVENIA
-set -gx MISO_NDA_BUCKET invenia-miso-nda-5twngkbmrczu6xd9uppda18b5995yuse1a-s3alias
+# RAI: include this plugin so nix will work
+# https://github.com/NixOS/nix/issues/1512
+# https://github.com/oh-my-fish/plugin-foreign-env
+set fish_function_path $fish_function_path $HOME/.config/fish/plugin-foreign-env/functions
 
 # clear with crtl+n because crtl+l used by vim-tmux-navigator. See:
 # github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_shared_key_bindings.fish#L83
@@ -51,11 +53,11 @@ if status --is-interactive
     abbr -a gr 'git rebase'
     abbr -a grb 'git rebase -i (git merge-base origin/main HEAD)'
     abbr -a gs 'git status'
+    abbr -a ta 'tmux attach-session'
     abbr -a tn 'tmux new -s'
     abbr -a ts 'tmux switch -t'
     abbr -a rgf 'rg --files-with-matches'
-    abbr -a rgc 'rg --ignore-case'
-    abbr -a rgi 'rg --only-matching "https://gitlab.invenia.ca/\S*/issues/\d+"' # rg issues
+    abbr -a rgi 'rg --ignore-case'
 end
 set -g fish_user_paths "/usr/local/opt/sqlite/bin" "/opt/homebrew/bin" $fish_user_paths
 
