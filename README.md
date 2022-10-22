@@ -15,8 +15,13 @@ neovim supports Python 3. For example on macOS with
 [homebrew](https://brew.sh/), run
 
 ```sh
-brew install neovim python3 tmux
+brew install neovim python3 tmux reattach-to-user-namespace
 pip3 install --upgrade neovim
+```
+
+Install other common tools e.g.
+```sh
+brew install ripgrep fzy tldr bat tree
 ```
 
 Add new neovim plugins with [vim-plug](https://github.com/junegunn/vim-plug)
